@@ -5,6 +5,7 @@
 - Add a file to the bucket `aws s3 cp test.txt s3://BUCKETNAME` test.txt is the file
 - Delete file `sudo rm -rf test.txt`
 - Download file from S3 bucket to EC2 instance `aws s3 cp s3://BUCKETNAME/test.txt test2.txt` test.txt is the file in S3 and test2.txt is the copy of the file
+- Delete bucket `aws s3 rb s3://BUCKETNAME`
 ## Install the latest version of Python in EC2 instance
 Follow the commands below to install the latest version of Python
 - SSH into the EC2 instance
@@ -28,3 +29,4 @@ python3.9 get-pip.py
 - Specify format `json`
 
 ## Boto3
+- Run `pip install boto3` in the GitBash terminal
