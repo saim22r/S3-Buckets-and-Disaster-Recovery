@@ -28,5 +28,58 @@ python3.9 get-pip.py
 - Specify region `eu-west-1`
 - Specify format `json`
 
-## Boto3
+# Using boto3 with AWS
+### Initial set up
 - Run `pip install boto3` in the GitBash terminal
+- Create a new directory in EC2 instance `mkdir DIRECTORYNAME`
+- Enter directory and create python file `touch FILENAME.py` then `sudo nano FILENAME.py`
+- Create a new python file for each case below
+
+### Show all existing buckets 
+````
+import boto3
+s3 = boto3.client('s3')
+
+response = s3.list_buckets()
+
+print('Existing buckets:')
+for bucket in response['Buckets']:
+    print(f'  {bucket["Name"]}')
+````
+### Create a bucket using boto3
+````
+import boto3
+s3 = boto3.client('s3')
+
+s3.create_bucket(Bucket='eng89-saim-boto', CreateBucketConfiguration={
+    'LocationConstraint': 'eu-west-1'})
+````
+### Upload file using boto3
+````
+import boto3
+s3 = boto3.client('s3')
+
+s3.upload_file('test.txt', 'eng89-saim-boto', 'test.txt')
+````
+### Downloading file using boto3
+````
+import boto3
+s3 = boto3.client('s3')
+
+s3.download_file('eng89-saim-boto', 'test.txt', 'test2.txt')
+````
+### Deleting file using boto3
+````
+import boto3
+s3 = boto3.client('s3')
+
+s3.delete_object(Bucket='eng89-saim-boto', Key='test.txt')
+````
+### Delete bucket using boto3
+- Bucket must be empty when deleting
+````
+import boto3
+s3 = boto3.client('s3')
+
+s3.delete_bucket(Bucket='eng89-saim-boto')
+````
